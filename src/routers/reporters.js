@@ -6,7 +6,7 @@ const auth=require('../middleware/auth')
 const Reporters = require('../models/reporters2')
 
 
-//////////////get reporters/////////////
+//////get reporters
 
 router.get('/reporters',auth,(req,res)=>{
     Reporters.find({}).then((reporters)=>{
@@ -16,7 +16,7 @@ router.get('/reporters',auth,(req,res)=>{
     })
 })
 
-////post reporters///////////////
+////post reporters
 router.post('/reporters',async(req,res)=>{
     const reporters=new Reporters(req.body)
     try{
@@ -24,13 +24,14 @@ router.post('/reporters',async(req,res)=>{
         const token=await reporters.generateToken()
         res.status(200).send({reporters,token})
 
-    }catch(e){
+    }
+    catch(e){
          res.status(400).send('unable')
            }
 })
 
 
-////////////////reporters login////////////////////
+/////reporters login
 router.post('/reporters/login',async(req,res)=>{
     try{
         const reporters=await Reporters.findByCredentials(req.body.email,req.body.password)
@@ -42,11 +43,11 @@ router.post('/reporters/login',async(req,res)=>{
         res.status(400).send('unable to login check your info')
     }
 })
-//////////////////////go to reporter profile/////////////
+/////// reporter profile
 router.get('/profile',auth,async(req,res)=>{
     res.send(req.reporters)
 })
-////////////////////delete reporter profile/////////////
+/////delete reporter profile
 router.delete('/profile',auth,async(req,res)=>{
     try{
         await req.reporters.remove()
@@ -56,7 +57,7 @@ router.delete('/profile',auth,async(req,res)=>{
     }
 })
 
-//////////////////////logout 
+///////logout 
 router.post('/logout',auth,async(req,res)=>{
     try{req.reporters.tokens=req.reporters.tokens.filter((el)=>{
         return el.token!==req.token
@@ -68,7 +69,7 @@ router.post('/logout',auth,async(req,res)=>{
 
     }
 }) 
-////////////////////edit info of the reporters ///////////
+//////edit info of the reporters
 router.patch('/profile',auth, async(req,res)=>{
     const updates = Object.keys(req.body)
     console.log(updates)
@@ -83,13 +84,6 @@ router.patch('/profile',auth, async(req,res)=>{
         res.status(400).send('error has occurd')
     }
 })
-
-
-
-
-
-
-
 
 
 
