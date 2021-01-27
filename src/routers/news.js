@@ -4,7 +4,7 @@ const router=new express.Router()
 const auth=require('../middleware/auth')
 const Reporters = require('../models/reporters2')
 
-///////// add new news 
+/// add new news 
 
 router.post('/news',auth,async(req,res)=>{
     const news=new News({
@@ -89,7 +89,7 @@ router.patch('/news/:id',auth,async(req,res)=>{
     }
 })
 
-///////////////delete news by id
+////delete news by id
 router.delete('/news/:id',auth, async(req,res)=>{
     const _id=req.params.id
     try{
@@ -98,12 +98,13 @@ router.delete('/news/:id',auth, async(req,res)=>{
         if(!reporters){
             return res.status(400).send()
         } return res.send(reporters)
-    }catch(e){
+    }
+    catch(e){
 return res.status(500).send()
     }
 })
 
-////////////////////////add photo to news
+/////////add photo to news
 
 const multer=require('multer')
 const uploads=multer({
