@@ -35,7 +35,8 @@ const NewsSchema=mongoose.Schema({
     
     
 
-},{
+},
+   {
     timestamps:true
     
 })
