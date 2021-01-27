@@ -39,7 +39,8 @@ router.post('/reporters/login',async(req,res)=>{
         const token=await reporters.generateToken()
         res.status(200).send({reporters,token})
         
-    }catch(e){
+    }
+    catch(e){
         res.status(400).send('unable to login check your info')
     }
 })
@@ -52,7 +53,8 @@ router.delete('/profile',auth,async(req,res)=>{
     try{
         await req.reporters.remove()
         res.send('profile was deleted')
-    }catch(e){
+    }
+    catch(e){
         res.send(e)
     }
 })
