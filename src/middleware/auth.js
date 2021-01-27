@@ -16,7 +16,9 @@ const auth=async(req,res,next)=>{
         req.reporters=reporters
         req.token=token
         next()
-    }catch(e){
+    }
+  
+  catch(e){
         res.status(401).send({error:'please authenticate'})
     }
 }
